@@ -7,17 +7,22 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>Questionnaire constructor</h1>
-    <div id="edit"></div>
-    <input type="text" id="qName" placeholder="Questionnaire name" />
-    <input
-      type="text"
-      id="qDescription"
-      placeholder="Questionnaire description"
-    />
-    <div id="questions"></div>
-    <button id="addQuestion">Add a question</button>
-    <button id="saveQuestionnaire">Save the questionnaire</button>
+    <div class="wrapper">
+      <h1>Questionnaire constructor</h1>
+      <div id="edit">
+        <input type="text" id="qName" placeholder="Questionnaire name" />
+        <input
+          type="text"
+          id="qDescription"
+          placeholder="Questionnaire description"
+        />
+        <div id="questions"></div>
+        <button class="button" id="addQuestion">Add a question</button>
+        <button class="button" id="saveQuestionnaire">
+          Save the questionnaire
+        </button>
+      </div>
+    </div>
     <script src="api.js"></script>
     <script src="script.js"></script>
   </body>

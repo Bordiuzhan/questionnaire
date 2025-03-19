@@ -52,11 +52,13 @@ function fetchCatalog() {
                     <p>${q.description || 'No description'}</p>
                     <p>Questions: ${q.questions.length}</p>
                     <p>Completed: ${q.completions || 0}</p>
-                    <button onclick="runQuestionnaire('${q._id}')">Run</button>
-                    <button onclick="editQuestionnaire('${
+                    <button class="run button" onclick="runQuestionnaire('${
+                      q._id
+                    }')">Run</button>
+                    <button class="edit button" onclick="editQuestionnaire('${
                       q._id
                     }')">Edit</button>
-                    <button onclick="deleteQuestionnaire('${
+                    <button class="delete button" onclick="deleteQuestionnaire('${
                       q._id
                     }')">Remove</button>
                 </div>`
@@ -71,6 +73,7 @@ function fetchCatalog() {
 function addQuestion() {
   const questionsDiv = document.getElementById('questions');
   const newQuestion = document.createElement('div');
+  newQuestion.classList.add('question');
   newQuestion.innerHTML = `
       <select class="question-type">
         <option value="text">Text</option>
@@ -78,10 +81,10 @@ function addQuestion() {
       </select>
     <textarea placeholder="Question"></textarea>
     <div class="options-container" style="display: none;">
-      <button type="button" class="add-option">Add option</button>
+      <button type="button" class="add-option button add-button">Add option</button>
       <div class="options"></div>
     </div>
-    <button onclick="this.parentElement.remove()">Remove</button>
+    <button class="button remove-button" onclick="this.parentElement.remove()">Remove</button>
     `;
   const questionTypeSelect = newQuestion.querySelector('.question-type');
   const optionsContainer = newQuestion.querySelector('.options-container');
@@ -90,7 +93,7 @@ function addQuestion() {
 
   questionTypeSelect.addEventListener('change', (e) => {
     if (e.target.value === 'multiple-choice') {
-      optionsContainer.style.display = 'block';
+      optionsContainer.style.display = 'flex';
     } else {
       optionsContainer.style.display = 'none';
       optionsDiv.innerHTML = '';
@@ -101,7 +104,7 @@ function addQuestion() {
   addOptionButton.addEventListener('click', () => {
     const optionInput = document.createElement('input');
     optionInput.type = 'text';
-    optionInput.placeholder = 'Опція';
+    optionInput.placeholder = 'Option';
     optionsDiv.appendChild(optionInput);
   });
 
@@ -236,9 +239,9 @@ function fetchQuestionnaireForEdit() {
           </select>
           <textarea placeholder="Question">${q.text}</textarea>
           <div class="options-container" style="display: ${
-            q.type === 'multiple-choice' ? 'block' : 'none'
+            q.type === 'multiple-choice' ? 'flex' : 'none'
           };">
-            <button type="button" class="add-option">Add option</button>
+            <button type="button" class="add-option button add-button">Add option</button>
             <div class="options">
               ${q.options
                 .map(
@@ -248,7 +251,7 @@ function fetchQuestionnaireForEdit() {
                 .join('')}
             </div>
           </div>
-          <button onclick="this.parentElement.remove()">Remove</button>
+          <button class ="button remove-button" onclick="this.parentElement.remove()">Remove</button>
         `;
 
         const questionTypeSelect = newQuestion.querySelector('.question-type');
@@ -259,7 +262,7 @@ function fetchQuestionnaireForEdit() {
 
         questionTypeSelect.addEventListener('change', (e) => {
           if (e.target.value === 'multiple-choice') {
-            optionsContainer.style.display = 'block';
+            optionsContainer.style.display = 'block: ';
           } else {
             optionsContainer.style.display = 'none';
             optionsDiv.innerHTML = '';
